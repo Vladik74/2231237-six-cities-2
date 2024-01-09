@@ -1,11 +1,11 @@
-import {ILogger} from '../loggers/iLogger';
+import {ILogger} from '../loggers/iLogger.js';
 import {inject, injectable} from 'inversify';
-import {ExceptionFilter} from './exception.filter';
-import {HttpError} from './http.errors';
+import {ExceptionFilter} from './exception.filter.js';
+import {HttpError} from './http.errors.js';
 import {NextFunction, Request, Response} from 'express';
-import {ComponentEnum} from '../types/component.enum';
+import {ComponentEnum} from '../types/component.enum.js';
 import {StatusCodes} from 'http-status-codes';
-import {createErrorObject} from '../helpers/common';
+import {createErrorObject} from '../helpers/common.js';
 
 @injectable()
 export default class AppExceptionFilter implements ExceptionFilter {

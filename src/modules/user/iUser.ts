@@ -1,7 +1,9 @@
 import {DocumentType} from '@typegoose/typegoose';
 import CreateUser from './create-user.js';
-import {UserEntity} from './user.entity';
-import {OfferEntity} from '../offer/offer.entity';
+import {UserEntity} from './user.entity.js';
+import {OfferEntity} from '../offer/offer.entity.js';
+import LoginUser from './login-user.js';
+import UpdateUser from './update-user.js';
 
 export interface IUser {
   create(dto: CreateUser, salt: string): Promise<DocumentType<UserEntity>>;
@@ -12,9 +14,13 @@ export interface IUser {
 
   findById(userId: string): Promise<DocumentType<UserEntity> | null>;
 
+  updateById(userId: string, dto: UpdateUser): Promise<DocumentType<UserEntity> | null>;
+
   findFavorites(userId: string): Promise<DocumentType<OfferEntity>[]>;
 
-  addToFavoritesById(userId: string, offerId: string): Promise<DocumentType<OfferEntity>[] | null>;
+  addToFavoritesById(userId: string, offerId: string): Promise<void>;
 
-  removeFromFavoritesById(userId: string, offerId: string): Promise<DocumentType<OfferEntity>[] | null>;
+  removeFromFavoritesById(userId: string, offerId: string): Promise<void>;
+
+  authUser(dto: LoginUser, salt: string): Promise<DocumentType<UserEntity> | null>;
 }

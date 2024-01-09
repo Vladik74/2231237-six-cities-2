@@ -12,7 +12,10 @@ export type ConfigSchema = {
   DB_PASSWORD: string;
   DB_PORT: string;
   DB_NAME: string;
+  JWT_SECRET: string;
   UPLOAD_DIR: string;
+  STATIC_DIR_PATH: string;
+  HOST: string;
 }
 
 export const configSchema = convict<ConfigSchema>({
@@ -58,10 +61,28 @@ export const configSchema = convict<ConfigSchema>({
     env: 'DB_NAME',
     default: 'buy-and-sell'
   },
+  JWT_SECRET: {
+    doc: 'Secret for sign JWT token',
+    format: String,
+    env: 'JWT_SECRET',
+    default: null
+  },
   UPLOAD_DIR: {
     doc: 'Directory for upload files',
     format: String,
     env: 'UPLOAD_DIR',
     default: null
+  },
+  STATIC_DIR_PATH: {
+    doc: 'Path to directory with static resources',
+    format: String,
+    env: 'STATIC_DIR_PATH',
+    default: 'static'
+  },
+  HOST: {
+    doc: 'Host where started service',
+    format: String,
+    env: 'HOST',
+    default: 'localhost'
   }
 });

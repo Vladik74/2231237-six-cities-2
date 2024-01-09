@@ -1,4 +1,4 @@
-import {ILogger} from './iLogger';
+import {ILogger} from './iLogger.js';
 
 export default class ConsoleLogger implements ILogger {
   public debug(message: string, ...args: unknown[]): void {

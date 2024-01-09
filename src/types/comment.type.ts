@@ -1,4 +1,4 @@
-import {UserTypeEnum} from './user.type.enum';
+import {UserTypeEnum} from './user.type.enum.js';
 
 
 export type CommentType = {

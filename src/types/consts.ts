@@ -10,3 +10,11 @@ export const FIRST_WEEK_DAY = 1;
 export const LAST_WEEK_DAY = 7;
 export const DEFAULT_DB_PORT = '27017';
 export const DEFAULT_USER_PASSWORD = '123456';
+export const JWT_CRYPT_ALGORITHM = 'HS256';
+export const STATIC_FIELDS = [
+  'avatar', 'previewImage', 'images'
+];
+export const DEFAULT_AVATAR = 'default-avatar.jpg';
+export const DEFAULT_STATIC_IMAGES = [
+  'default-avatar.jpg',
+];

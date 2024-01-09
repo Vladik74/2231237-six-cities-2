@@ -1,4 +1,4 @@
-import {MockData} from '../types/mock-offer.type';
+import {MockData} from '../types/mock-offer.type.js';
 import {generateRandomValue, getRandomItem, getRandomItems} from '../helpers/random.js';
 import {
   FIRST_WEEK_DAY,
@@ -13,9 +13,9 @@ import {
   MIN_RENT_COST
 } from '../types/consts.js';
 import {CityEnum} from '../types/city.enum.js';
-import {HousingTypeEnum} from '../types/housing.type.enum';
+import {HousingTypeEnum} from '../types/housing.type.enum.js';
 import {AmenitiesEnum} from '../types/amenities.enum.js';
-import {UserTypeEnum} from '../types/user.type.enum';
+import {UserTypeEnum} from '../types/user.type.enum.js';
 import dayjs from 'dayjs';
 
 export interface OfferGeneratorInterface {

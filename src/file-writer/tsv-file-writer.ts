@@ -1,4 +1,3 @@
-
 import {createWriteStream, WriteStream} from 'node:fs';
 import {FileWriterInterface} from './file-writer.js';
 

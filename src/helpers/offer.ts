@@ -1,8 +1,8 @@
-import {OfferType} from '../types/offer.type';
-import {CityEnum} from '../types/city.enum';
-import {HousingTypeEnum} from '../types/housing.type.enum';
-import {AmenitiesEnum} from '../types/amenities.enum';
-import {UserTypeEnum} from '../types/user.type.enum';
+import {OfferType} from '../types/offer.type.js';
+import {CityEnum} from '../types/city.enum.js';
+import {HousingTypeEnum} from '../types/housing.type.enum.js';
+import {AmenitiesEnum} from '../types/amenities.enum.js';
+import {UserTypeEnum} from '../types/user.type.enum.js';
 
 export function createNewOffer(offer: string): OfferType {
   const offerRow = offer.replace('\n', '').split('\t');

@@ -1,8 +1,8 @@
-import {CityEnum} from './city.enum';
-import {AmenitiesEnum} from './amenities.enum';
+import {CityEnum} from './city.enum.js';
+import {AmenitiesEnum} from './amenities.enum.js';
 import {CoordinatesType} from './coords.js';
 import {User} from './user.js';
-import {HousingTypeEnum} from './housing.type.enum';
+import {HousingTypeEnum} from './housing.type.enum.js';
 
 export type OfferType = {
   name: string;

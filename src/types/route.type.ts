@@ -1,6 +1,6 @@
 import {HttpMethod} from './http-method.enum.js';
 import {NextFunction, Request, Response} from 'express';
-import {IMiddleware} from '../middlewares/iMiddleware';
+import {IMiddleware} from '../middlewares/iMiddleware.js';
 
 export interface IRoute {
   path: string;

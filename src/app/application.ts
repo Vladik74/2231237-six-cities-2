@@ -1,13 +1,16 @@
+import 'reflect-metadata';
 import {inject, injectable} from 'inversify';
-import {ILogger} from '../loggers/iLogger';
-import {ComponentEnum} from '../types/component.enum';
-import {ConfigSchema} from '../config/config.schema';
+import {ILogger} from '../loggers/iLogger.js';
+import {ComponentEnum} from '../types/component.enum.js';
+import {ConfigSchema} from '../config/config.schema.js';
 import {Iconfig} from '../config/iconfig.js';
 import express, {Express} from 'express';
-import {IDbClient} from '../db-client/iDb-client';
-import {ExceptionFilter} from '../http-handlers/exception.filter';
-import {IController} from '../controller/IController';
-import {getConnectionString} from '../helpers/common';
+import {IDbClient} from '../db-client/iDb-client.js';
+import {ExceptionFilter} from '../http-handlers/exception.filter.js';
+import {IController} from '../controller/IController.js';
+import {getConnectionString} from '../helpers/common.js';
+import {AuthMiddleware} from '../middlewares/auth.middleware.js';
+
 
 @injectable()
 export default class Application {
@@ -16,7 +19,7 @@ export default class Application {
   constructor(
     @inject(ComponentEnum.ILogger) private readonly logger: ILogger,
     @inject(ComponentEnum.IConfig) private readonly config: Iconfig<ConfigSchema>,
-    @inject(ComponentEnum.DatabaseClientInterface) private readonly databaseClient: IDbClient,
+    @inject(ComponentEnum.IDbClient) private readonly databaseClient: IDbClient,
     @inject(ComponentEnum.OfferModel) private readonly offerController: IController,
     @inject(ComponentEnum.CommentController) private readonly commentController: IController,
     @inject(ComponentEnum.UserController) private userController: IController,
@@ -64,6 +67,12 @@ export default class Application {
       '/upload',
       express.static(this.config.get('UPLOAD_DIR'))
     );
+    this.server.use(
+      '/static',
+      express.static(this.config.get('STATIC_DIR_PATH'))
+    );
+    const authMiddleware = new AuthMiddleware(this.config.get('JWT_SECRET'));
+    this.server.use(authMiddleware.execute.bind(authMiddleware));
   }
 
   public async init() {

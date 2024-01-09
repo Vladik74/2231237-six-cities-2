@@ -1,12 +1,12 @@
-import {IDbClient} from './iDb-client';
+import {IDbClient} from './iDb-client.js';
 import mongoose, {Mongoose} from 'mongoose';
 import {inject, injectable} from 'inversify';
 import {ComponentEnum} from '../types/component.enum.js';
-import {ILogger} from '../loggers/iLogger';
+import {ILogger} from '../loggers/iLogger.js';
 import {setTimeout} from 'node:timers/promises';
 
 const RETRY_COUNT = 5;
-const RETRY_TIMEOUT = 1000;
+const RETRY_TIMEOUT = 10000;
 
 @injectable()
 export default class MongoClientService implements IDbClient {
@@ -22,10 +22,11 @@ export default class MongoClientService implements IDbClient {
     let attempt = 0;
     while (attempt < RETRY_COUNT) {
       try {
+        this.logger.info(uri);
         return await mongoose.connect(uri);
       } catch (error) {
         attempt++;
-        this.logger.error(`Ошибка при подключении к бд. Попытка ${attempt}`);
+        this.logger.error(`Ошибка при подключении к бд. Попытка ${error}`);
         await setTimeout(RETRY_TIMEOUT);
       }
     }
@@ -52,6 +53,7 @@ export default class MongoClientService implements IDbClient {
 
     this.logger.info('Попытка подключения к MongoDB');
     await this._connect(uri);
+    this.logger.info(uri);
     this.logger.info('Соединение с MongoDB установлено');
   }
 

@@ -2,9 +2,9 @@ import TSVFileWriter from '../file-writer/tsv-file-writer.js';
 import fetch from 'node-fetch';
 import {CliCommandInterface} from './cli-command.js';
 import OfferGenerator from '../modules/offer-generator.js';
-import {MockData} from '../types/mock-offer.type';
-import {ILogger} from '../loggers/iLogger';
-import LoggerService from '../loggers/logger';
+import {MockData} from '../types/mock-offer.type.js';
+import {ILogger} from '../loggers/iLogger.js';
+import LoggerService from '../loggers/logger.js';
 
 export default class GenerateCommand implements CliCommandInterface {
   public readonly name = '--generate';

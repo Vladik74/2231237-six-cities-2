@@ -1,12 +1,11 @@
-import {AmenitiesEnum} from '../../types/amenities.enum';
-import {CoordinatesType} from '../../types/coords';
-import {HousingTypeEnum} from '../../types/housing.type.enum';
-import {CityEnum} from '../../types/city.enum';
+import {AmenitiesEnum} from '../../types/amenities.enum.js';
+import {CoordinatesType} from '../../types/coords.js';
+import {HousingTypeEnum} from '../../types/housing.type.enum.js';
+import {CityEnum} from '../../types/city.enum.js';
 import {
   ArrayNotEmpty,
   IsArray,
   IsBoolean,
-  IsDateString,
   IsEnum, IsObject,
   IsOptional,
   IsString, Max,
@@ -38,10 +37,6 @@ export class UpdateOffer {
   @IsArray({message: 'field images must be an array'})
   @IsString({each: true, message: 'image path should be string'})
   public images?: string[];
-
-  @IsOptional()
-  @IsDateString({}, {message: 'postDate must be a valid ISO string'})
-  public publicationDate!: Date;
 
   @IsOptional()
   @IsBoolean({message: 'field premium must be boolean'})

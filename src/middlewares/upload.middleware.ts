@@ -1,4 +1,4 @@
-import {IMiddleware} from './iMiddleware';
+import {IMiddleware} from './iMiddleware.js';
 import {NextFunction, Request, Response} from 'express';
 import multer, {diskStorage} from 'multer';
 import {extension} from 'mime-types';

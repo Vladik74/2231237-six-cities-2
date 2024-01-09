@@ -2,7 +2,7 @@ export enum ComponentEnum {
   Application = 'Application',
   ILogger = 'ILogger',
   IConfig = 'IConfig',
-  DatabaseClientInterface = 'DatabaseClientInterface',
+  IDbClient = 'IDbClient',
   IUser = 'IUser',
   UserModel = 'UserModel',
   CoordinatesServiceInterface = 'CoordinatesServiceInterface',

@@ -29,3 +29,4 @@ export default class ConfigService implements Iconfig<ConfigSchema> {
     return this.config[key];
   }
 }
+

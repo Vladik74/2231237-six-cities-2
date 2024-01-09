@@ -1,9 +1,9 @@
 import typegoose, {defaultClasses, getModelForClass, Ref, Severity} from '@typegoose/typegoose';
-import {CityEnum} from '../../types/city.enum';
-import {AmenitiesEnum} from '../../types/amenities.enum';
-import {HousingTypeEnum} from '../../types/housing.type.enum';
+import {CityEnum} from '../../types/city.enum.js';
+import {AmenitiesEnum} from '../../types/amenities.enum.js';
+import {HousingTypeEnum} from '../../types/housing.type.enum.js';
 import {CoordinatesType} from '../../types/coords.js';
-import {UserEntity} from '../user/user.entity';
+import {UserEntity} from '../user/user.entity.js';
 import mongoose from 'mongoose';
 
 const {prop, modelOptions} = typegoose;
@@ -92,15 +92,16 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({required: true, default: false, type: () => Boolean})
   public premium!: boolean;
 
-  @prop({required: true, type: () => String})
+  @prop({type: () => String, default: ''})
   public previewImage!: string;
 
-  @prop({required: true, type: () => Date})
+  @prop({type: () => Date})
   public publicationDate!: Date;
 
   @prop({
     required: true, min: [1, 'Min length for rating is 1'],
     max: [5, 'Max length for rating is 5'],
+    default: 1,
     type: () => Number
   })
   public rating!: number;

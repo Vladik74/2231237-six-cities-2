@@ -53,12 +53,7 @@ paths:
           description: Авторизация прошла успешно
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                    example: TOKEN
+              schema: '#/components/schemas/loginUse'
 
         "401":
           description: Авторизация не пройдена
@@ -75,8 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user'
-
+                $ref: '#/components/schemas/loginUser'
         "401":
           description: Пользователь не авторизован
 
@@ -85,15 +79,17 @@ paths:
       tags:
         - users
       summary: Выход из закрытой части приложения
-      description: Метод отвечает за выход из закрытой части приложения (только если авторизация выполняется на основе сессий)
+      description: Метод отвечает за выход из закрытой части приложения
       responses:
         "204":
           description: Сессия завершена
+        "401":
+          description: Пользователь не авторизован
 
-  /users/favorite:
+  /offers/users/favorite:
     get:
       tags:
-        - users
+        - offers
       summary: Список избранных предложений
       description: Метод возвращает список предложений, добавленных в избранное
       security:
@@ -104,14 +100,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/offers'
+                $ref: '#/components/schemas/shortOffers'
         "401":
           description: Пользователь не авторизован
 
-  /users/favorite/{offerId}:
+  /offers/favorite/{offerId}:
     post:
       tags:
-        - users
+        - offers
       summary: Добавление предложения в избранное
       description: Метод добавляет предложение в избранное
       security:
@@ -137,8 +133,6 @@ paths:
           description: Предложение успешного удалено из избранного
         "401":
           description: Пользователь не авторизован
-        "500":
-          description: Предложение не удалено из избранного
 
   /offers/premium/{city}:
     post:
@@ -153,7 +147,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/offers'
+              $ref: '#/components/schemas/shortOffers'
               "404":
                 description: Список предложений для city не получен
         required: true
@@ -190,7 +184,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/editOffer'
+                $ref: '#/components/schemas/offer'
         "400":
           description: Предложение не изменено из-за невалидных параметров
         "401":
@@ -237,7 +231,7 @@ paths:
       parameters:
         - name: count
           in: query
-          description: OFFER COUNT
+          description: Количество предложений
           content:
             application/json:
               schema:
@@ -252,7 +246,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/offers'
+                $ref: '#/components/schemas/shortOffers'
     post:
       tags:
         - offers
@@ -265,7 +259,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/offer'
+              $ref: '#/components/schemas/editOffer'
         required: true
       responses:
         "200":
@@ -302,18 +296,6 @@ paths:
       description: Метод добавляет новый комментарий
       security:
         - Bearer: [ ]
-      parameters:
-        - name: offerId
-          in: query
-          description: OFFER ID
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  offerId:
-                    type: string
-                    example: ID
       requestBody:
         description: Добавление комментария
         content:
@@ -400,13 +382,16 @@ components:
           type: string
           example: keks@htmlacademy.ru
 
-        password:
+        token:
           type: string
-          example: 123456
 
     offer:
       type: object
       properties:
+        id:
+          type: string
+          example: 37485jd456fgh6trj3c6329hf
+
         name:
           type: string
           example: Квартира
@@ -478,7 +463,7 @@ components:
           minimum: 100
           maximum: 100000
 
-        facilities:
+        amenities:
           type: array
           items:
             type: string
@@ -496,12 +481,12 @@ components:
         coordinates:
           $ref: '#/components/schemas/coordinates'
 
-    editOffer:
+    shortOffer:
       type: object
       properties:
         id:
           type: string
-          example: 6329c3d6a04ab1061c6425ea
+          example: 37485jd456fgh6trj3c6329hf
 
         name:
           type: string
@@ -528,14 +513,6 @@ components:
           type: string
           example: offer.jpg
 
-        images:
-          type: array
-          items:
-            type: string
-            example: [ offer.jpg, offer_room.jpg ]
-          minItems: 6
-          maxItems: 6
-
         premium:
           type: boolean
           example: true
@@ -556,31 +533,11 @@ components:
           enum: [ Apartment, House, Room, Hotel ]
           example: apartment
 
-        roomCount:
-          type: integer
-          example: 4
-          minimum: 1
-          maximum: 8
-
-        guestCount:
-          type: integer
-          example: 3
-          minimum: 1
-          maximum: 10
-
         cost:
           type: number
           example: 50600
           minimum: 100
           maximum: 100000
-
-        facilities:
-          type: array
-          items:
-            type: string
-            enum: [ Breakfast, Air conditioning, Laptop friendly workspace, Baby seat, Washer, Towels, Fridge ]
-            example: [ Breakfast, Laptop ]
-          minItems: 1
 
         offerAuthor:
           $ref: '#/components/schemas/user'
@@ -591,6 +548,85 @@ components:
 
         coordinates:
           $ref: '#/components/schemas/coordinates'
+
+    editOffer:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Квартира
+          minLength: 10
+          maxLength: 100
+
+        description:
+          type: string
+          example: Описание
+          minLength: 20
+          maxLength: 1024
+
+        city:
+          type: string
+          enum: [ Paris, Cologne, Brussels, Amsterdam, Hamburg, Dusseldorf ]
+          example: Paris
+
+        previewImage:
+          type: string
+          example: offer.jpg
+
+        images:
+          type: array
+          items:
+            type: string
+            example: [ offer.jpg, offer_room.jpg ]
+          minItems: 6
+          maxItems: 6
+
+        premium:
+          type: boolean
+          example: true
+
+        housingType:
+          type: string
+          enum: [ Apartment, House, Room, Hotel ]
+          example: apartment
+
+        roomCount:
+          type: integer
+          example: 4
+          minimum: 1
+          maximum: 8
+        guestCount:
+          type: integer
+          example: 3
+          minimum: 1
+          maximum: 10
+        cost:
+          type: number
+          example: 50600
+          minimum: 100
+          maximum: 100000
+        amenities:
+          type: array
+          items:
+            type: string
+            enum: [ Breakfast, Air conditioning, Laptop friendly workspace, Baby seat, Washer, Towels, Fridge ]
+            example: [ Breakfast, Laptop ]
+          minItems: 1
+
+        coordinates:
+          $ref: '#/components/schemas/coordinates'
+
+    shortOffers:
+      type: array
+      items:
+        type: offer
+        $ref: '#/components/schemas/shortOffer'
+
+      comments:
+        type: array
+        items:
+          type: offer
+          $ref: '#/components/schemas/comment'
 
     offers:
       type: array

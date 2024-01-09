@@ -3,18 +3,18 @@ import {CliCommandInterface} from './cli-command.js';
 import TSVFileReader from '../file-reader/tsv-file-reader.js';
 import {getConnectionString, getErrorMessage} from '../helpers/common.js';
 import {createNewOffer} from '../helpers/offer.js';
-import {IUser} from '../modules/user/iUser';
-import {IOffer} from '../modules/offer/IOffer';
-import {IDbClient} from '../db-client/iDb-client';
-import {ILogger} from '../loggers/iLogger';
-import OfferService from '../modules/offer/offer.service';
-import {OfferModel} from '../modules/offer/offer.entity';
-import UserService from '../modules/user/user.service';
-import {UserModel} from '../modules/user/user.entity';
-import MongoClientService from '../db-client/mongodb-client';
-import ConsoleLogger from '../loggers/console.logger';
-import {OfferType} from '../types/offer.type';
-import {DEFAULT_DB_PORT, DEFAULT_USER_PASSWORD} from '../types/consts';
+import {IUser} from '../modules/user/iUser.js';
+import {IOffer} from '../modules/offer/IOffer.js';
+import {IDbClient} from '../db-client/iDb-client.js';
+import {ILogger} from '../loggers/iLogger.js';
+import OfferService from '../modules/offer/offer.service.js';
+import {OfferModel} from '../modules/offer/offer.entity.js';
+import UserService from '../modules/user/user.service.js';
+import {UserModel} from '../modules/user/user.entity.js';
+import MongoClientService from '../db-client/mongodb-client.js';
+import ConsoleLogger from '../loggers/console.logger.js';
+import {OfferType} from '../types/offer.type.js';
+import {DEFAULT_DB_PORT, DEFAULT_USER_PASSWORD} from '../types/consts.js';
 
 export default class ImportCommand implements CliCommandInterface {
   public readonly name = '--import';
@@ -30,7 +30,7 @@ export default class ImportCommand implements CliCommandInterface {
 
     this.logger = new ConsoleLogger();
     this.offerService = new OfferService(this.logger, OfferModel);
-    this.userService = new UserService(this.logger, UserModel);
+    this.userService = new UserService(this.logger, UserModel, OfferModel);
     this.databaseService = new MongoClientService(this.logger);
   }
 

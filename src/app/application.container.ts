@@ -1,13 +1,13 @@
 import {Container} from 'inversify';
-import Application from './application';
-import {ComponentEnum} from '../types/component.enum';
-import LoggerService from '../loggers/logger';
-import {ConfigSchema} from '../config/config.schema';
-import {ILogger} from '../loggers/iLogger';
-import {Iconfig} from '../config/iconfig';
-import ConfigService from '../config/config.service';
-import MongoClientService from '../db-client/mongodb-client';
-import {IDbClient} from '../db-client/iDb-client';
+import Application from './application.js';
+import {ComponentEnum} from '../types/component.enum.js';
+import LoggerService from '../loggers/logger.js';
+import {ConfigSchema} from '../config/config.schema.js';
+import {ILogger} from '../loggers/iLogger.js';
+import {Iconfig} from '../config/iconfig.js';
+import ConfigService from '../config/config.service.js';
+import MongoClientService from '../db-client/mongodb-client.js';
+import {IDbClient} from '../db-client/iDb-client.js';
 import {ExceptionFilter} from '../http-handlers/exception.filter.js';
 import AppExceptionFilter from '../http-handlers/app-exception.filter.js';
 
@@ -16,7 +16,7 @@ export function createApplicationContainer() {
   applicationContainer.bind<Application>(ComponentEnum.Application).to(Application).inSingletonScope();
   applicationContainer.bind<ILogger>(ComponentEnum.ILogger).to(LoggerService).inSingletonScope();
   applicationContainer.bind<Iconfig<ConfigSchema>>(ComponentEnum.IConfig).to(ConfigService).inSingletonScope();
-  applicationContainer.bind<IDbClient>(ComponentEnum.DatabaseClientInterface).to(MongoClientService).inSingletonScope();
+  applicationContainer.bind<IDbClient>(ComponentEnum.IDbClient).to(MongoClientService).inSingletonScope();
   applicationContainer.bind<ExceptionFilter>(ComponentEnum.ExceptionFilter).to(AppExceptionFilter).inSingletonScope();
 
   return applicationContainer;

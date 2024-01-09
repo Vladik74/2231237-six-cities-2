@@ -1,13 +1,12 @@
 import {CoordinatesType} from '../../types/coords.js';
-import {AmenitiesEnum} from '../../types/amenities.enum';
-import {HousingTypeEnum} from '../../types/housing.type.enum';
-import {CityEnum} from '../../types/city.enum';
+import {AmenitiesEnum} from '../../types/amenities.enum.js';
+import {HousingTypeEnum} from '../../types/housing.type.enum.js';
+import {CityEnum} from '../../types/city.enum.js';
 import {
   ArrayNotEmpty,
   IsArray,
   IsBoolean,
   IsEnum, IsObject,
-  IsString,
   Max,
   MaxLength,
   Min,
@@ -25,13 +24,6 @@ export default class CreateOffer {
 
   @IsEnum(CityEnum, {message: 'type must be one of the city'})
   public city!: CityEnum;
-
-  @IsString({message: 'preview path is required.'})
-  public previewImage!: string;
-
-  @IsArray({message: 'field images must be an array'})
-  @IsString({each: true, message: 'image path should be string'})
-  public images!: string[];
 
   @IsBoolean({message: 'field premium must be boolean'})
   public premium!: boolean;
@@ -59,5 +51,5 @@ export default class CreateOffer {
   public userId!: string;
 
   @IsObject({message: 'There should be object CoordinatesType'})
-  public coordinates!: CoordinatesType;
+  public coords!: CoordinatesType;
 }

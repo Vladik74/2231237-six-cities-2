@@ -1,8 +1,8 @@
 import {inject, injectable} from 'inversify';
-import {configSchema, ConfigSchema} from './config.schema';
-import {ComponentEnum} from '../types/component.enum';
+import {configSchema, ConfigSchema} from './config.schema.js';
+import {ComponentEnum} from '../types/component.enum.js';
 import {config} from 'dotenv';
-import {ILogger} from '../loggers/iLogger';
+import {ILogger} from '../loggers/iLogger.js';
 import {Iconfig} from './iconfig.js';
 
 @injectable()
@@ -29,3 +29,4 @@ export default class ConfigService implements Iconfig<ConfigSchema> {
     return this.config[key];
   }
 }
+

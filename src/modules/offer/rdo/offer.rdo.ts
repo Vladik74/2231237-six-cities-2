@@ -1,10 +1,10 @@
-import {CityEnum} from '../../../types/city.enum';
-import {HousingTypeEnum} from '../../../types/housing.type.enum';
+import {CityEnum} from '../../../types/city.enum.js';
+import {HousingTypeEnum} from '../../../types/housing.type.enum.js';
 import {Expose, Type} from 'class-transformer';
-import {AmenitiesEnum} from '../../../types/amenities.enum';
-import UserRdo from '../../user/rdo/user.rdo';
-import {UserTypeEnum} from '../../../types/user.type.enum';
-import {CoordinatesType} from '../../../types/coords';
+import {AmenitiesEnum} from '../../../types/amenities.enum.js';
+import UserRdo from '../../user/rdo/user.rdo.js';
+import {UserTypeEnum} from '../../../types/user.type.enum.js';
+import {CoordinatesType} from '../../../types/coords.js';
 
 export class OfferRdo {
   @Expose()

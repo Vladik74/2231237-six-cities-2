@@ -1,12 +1,12 @@
-import {IOffer} from './IOffer';
+import {IOffer} from './IOffer.js';
 import {inject, injectable} from 'inversify';
-import {ILogger} from '../../loggers/iLogger';
+import {ILogger} from '../../loggers/iLogger.js';
 import {DocumentType, types} from '@typegoose/typegoose';
 import {OfferEntity} from './offer.entity.js';
 import CreateOffer from './create-offer.js';
-import {ComponentEnum} from '../../types/component.enum';
-import {UpdateOffer} from './update-offer';
-import {SortType} from '../../types/sort.type';
+import {ComponentEnum} from '../../types/component.enum.js';
+import {UpdateOffer} from './update-offer.js';
+import {SortType} from '../../types/sort.type.js';
 
 const MAX_OFFERS_COUNT = 60;
 const MAX_PREMIUM_OFFERS_COUNT = 3;
@@ -78,5 +78,15 @@ export default class OfferService implements IOffer {
   public async exists(documentId: string): Promise<boolean> {
     return (await this.offerModel
       .exists({_id: documentId})) !== null;
+  }
+
+  public async addImage(offerId: string, image: string): Promise<void> {
+    await this.offerModel
+      .updateOne({_id: offerId}, {$addToSet: {images: image}});
+  }
+
+  public async deleteImage(offerId: string, image: string): Promise<void> {
+    await this.offerModel
+      .updateOne({_id: offerId}, {$pull: {images: image}});
   }
 }

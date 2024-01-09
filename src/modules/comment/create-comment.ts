@@ -12,6 +12,6 @@ export default class CreateComment {
   @IsInt({message: 'rating should be an integer.'})
   @IsNotEmpty({message: 'rating is required.'})
   @Min(1, {message: 'Min value for rating is 1.'})
-  @Max(10, {message: 'Max value for rating is 10.'})
+  @Max(5, {message: 'Max value for rating is 5.'})
   public rating!: number;
 }

@@ -1,5 +1,5 @@
 import {Expose} from 'class-transformer';
-import {HousingTypeEnum} from '../../../types/housing.type.enum';
+import {HousingTypeEnum} from '../../../types/housing.type.enum.js';
 
 export class OfferShortRdo {
   @Expose()

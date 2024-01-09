@@ -1,6 +1,6 @@
 import {Expose} from 'class-transformer';
-import {CityEnum} from '../../../types/city.enum';
-import {HousingTypeEnum} from '../../../types/housing.type.enum';
+import {CityEnum} from '../../../types/city.enum.js';
+import {HousingTypeEnum} from '../../../types/housing.type.enum.js';
 
 export class ShortFavoriteOfferDto {
   @Expose()
@@ -8,6 +8,9 @@ export class ShortFavoriteOfferDto {
 
   @Expose()
     name!: string;
+
+  @Expose()
+    description!: string;
 
   @Expose()
     publicationDate!: Date;

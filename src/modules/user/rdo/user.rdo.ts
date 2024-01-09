@@ -1,7 +1,10 @@
 import {Expose} from 'class-transformer';
-import {UserTypeEnum} from '../../../types/user.type.enum';
+import {UserTypeEnum} from '../../../types/user.type.enum.js';
 
 export default class UserRdo {
+  @Expose()
+  public id!: string;
+
   @Expose()
   public username!: string;
 

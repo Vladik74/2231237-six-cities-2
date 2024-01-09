@@ -1,11 +1,11 @@
 import {Container} from 'inversify';
 import {types} from '@typegoose/typegoose';
-import {CommentEntity, CommentModel} from './comment.entity';
-import CommentService from './comment.service';
-import {ComponentEnum} from '../../types/component.enum';
-import {IComment} from './IComment';
-import {IController} from '../../controller/IController';
-import CommentController from './comment.controller';
+import {CommentEntity, CommentModel} from './comment.entity.js';
+import CommentService from './comment.service.js';
+import {ComponentEnum} from '../../types/component.enum.js';
+import {IComment} from './IComment.js';
+import {IController} from '../../controller/IController.js';
+import CommentController from './comment.controller.js';
 
 export function createCommentContainer() {
   const commentContainer = new Container();

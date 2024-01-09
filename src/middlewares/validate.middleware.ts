@@ -1,4 +1,4 @@
-import {IMiddleware} from './iMiddleware';
+import {IMiddleware} from './iMiddleware.js';
 import {ClassConstructor, plainToInstance} from 'class-transformer';
 import {NextFunction, Request, Response} from 'express';
 import {validate} from 'class-validator';

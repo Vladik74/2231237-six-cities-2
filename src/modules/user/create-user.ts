@@ -1,4 +1,4 @@
-import {UserTypeEnum} from '../../types/user.type.enum';
+import {UserTypeEnum} from '../../types/user.type.enum.js';
 import {IsEmail, IsEnum, IsString, Length} from 'class-validator';
 
 export default class CreateUser {

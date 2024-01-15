@@ -57,9 +57,10 @@ export default class OfferService implements IOffer {
       .exec();
   }
 
-  incrementComment(offerId: string): Promise<DocumentType<OfferEntity> | null> {
+  public async incrementComment(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
-      .findByIdAndUpdate(offerId, {'$inc': {commentsCount: 1,}}).exec();
+      .findByIdAndUpdate(offerId, {$inc: {commentsCount: 1}})
+      .exec();
   }
 
   public async updateById(offerId: string, dto: UpdateOffer): Promise<DocumentType<OfferEntity> | null> {

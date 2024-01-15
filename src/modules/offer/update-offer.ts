@@ -69,5 +69,5 @@ export class UpdateOffer {
 
   @IsOptional()
   @IsObject({message: 'There should be object CoordinatesType'})
-  public coordinates?: CoordinatesType;
+  public coords?: CoordinatesType;
 }

@@ -49,7 +49,6 @@ export default class OfferController extends Controller {
       method: HttpMethod.Post,
       handler: this.create,
       middlewares: [
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
         new PrivateRouteMiddleware(),
         new ValidateDtoMiddleware(CreateOffer)
       ]

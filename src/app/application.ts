@@ -59,6 +59,7 @@ export default class Application {
 
   private async _initExceptionFilters() {
     this.server.use(this.appExceptionFilter.catch.bind(this.appExceptionFilter));
+    this.logger.info('Эксепшен-фильтры успешно инициализированы');
   }
 
   private async _initMiddleware() {
@@ -73,6 +74,7 @@ export default class Application {
     );
     const authMiddleware = new AuthMiddleware(this.config.get('JWT_SECRET'));
     this.server.use(authMiddleware.execute.bind(authMiddleware));
+    this.logger.info('Миддлвары успешно инициализированы');
   }
 
   public async init() {
@@ -85,8 +87,8 @@ export default class Application {
     await this._initDb();
     this.logger.info('База данных инициализирована');
 
-    await this._initRoutes();
     await this._initMiddleware();
+    await this._initRoutes();
     await this._initExceptionFilters();
     await this._initServer();
     this.logger.info(`Сервер запущен по адресу http://localhost:${this.config.get('PORT')}`);

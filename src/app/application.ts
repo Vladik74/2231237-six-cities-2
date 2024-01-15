@@ -59,6 +59,7 @@ export default class Application {
 
   private async _initExceptionFilters() {
     this.server.use(this.appExceptionFilter.catch.bind(this.appExceptionFilter));
+    this.logger.info('Эксепшен-фильтры успешно инициализированы');
   }
 
   private async _initMiddleware() {
@@ -73,7 +74,7 @@ export default class Application {
     );
     const authMiddleware = new AuthMiddleware(this.config.get('JWT_SECRET'));
     this.server.use(authMiddleware.execute.bind(authMiddleware));
-    this.logger.info('Миддлвары инициализированы');
+    this.logger.info('Миддлвары успешно инициализированы');
   }
 
   public async init() {

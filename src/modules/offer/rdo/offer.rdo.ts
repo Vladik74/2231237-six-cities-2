@@ -60,5 +60,5 @@ export class OfferRdo {
     offerAuthor!: UserTypeEnum;
 
   @Expose()
-    coordinates!: CoordinatesType;
+    coords!: CoordinatesType;
 }

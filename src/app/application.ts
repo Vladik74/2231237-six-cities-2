@@ -20,7 +20,7 @@ export default class Application {
     @inject(ComponentEnum.ILogger) private readonly logger: ILogger,
     @inject(ComponentEnum.IConfig) private readonly config: Iconfig<ConfigSchema>,
     @inject(ComponentEnum.IDbClient) private readonly databaseClient: IDbClient,
-    @inject(ComponentEnum.OfferModel) private readonly offerController: IController,
+    @inject(ComponentEnum.OfferController) private readonly offerController: IController,
     @inject(ComponentEnum.CommentController) private readonly commentController: IController,
     @inject(ComponentEnum.UserController) private userController: IController,
     @inject(ComponentEnum.ExceptionFilter) private readonly appExceptionFilter: ExceptionFilter,
@@ -73,6 +73,7 @@ export default class Application {
     );
     const authMiddleware = new AuthMiddleware(this.config.get('JWT_SECRET'));
     this.server.use(authMiddleware.execute.bind(authMiddleware));
+    this.logger.info('Миддлвары инициализированы');
   }
 
   public async init() {
@@ -85,8 +86,8 @@ export default class Application {
     await this._initDb();
     this.logger.info('База данных инициализирована');
 
-    await this._initRoutes();
     await this._initMiddleware();
+    await this._initRoutes();
     await this._initExceptionFilters();
     await this._initServer();
     this.logger.info(`Сервер запущен по адресу http://localhost:${this.config.get('PORT')}`);
